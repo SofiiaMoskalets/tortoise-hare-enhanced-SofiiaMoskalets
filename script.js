@@ -11,7 +11,8 @@ const TRACK_LENGTH = 70 //sometimes const variables are all caps
 const startBtn = document.getElementById("startBtn")
 const messageEl = document.getElementById("message")
 const trackEl = document.getElementById("track")
-const scoreboardEl = document.getElementById("scoreboard")
+const tortoiseScoreEl = document.getElementById("tortoiseScore")
+const hareScoreEl = document.getElementById("hareScore")
 
 let tortoisePosition = 1
 let harePosition = 1
@@ -104,7 +105,8 @@ function renderTrack(){
 }
 
 function updateScoreboard(){
-    scoreboardEl.textContent = `Tortoise: ${tortoiseWins} wins Hare: ${hareWins} wins`
+    tortoiseScoreEl.textContent = `Tortoise: ${tortoiseWins} wins`
+    hareScoreEl.textContent = `Hare: ${hareWins} wins`
 }
 
 function showResult(){
@@ -112,10 +114,10 @@ function showResult(){
         messageEl.textContent = "It's a tie"
     } else if (tortoisePosition >= TRACK_LENGTH){
         messageEl.textContent = "TORTOISE WINS!"
-        tortoiseWins =+ 1
+        tortoiseWins += 1
     } else if (harePosition >= TRACK_LENGTH){
         messageEl.textContent = "HARE WINS!"
-        hareWins =+ 1
+        hareWins += 1
     } else {
         messageEl.textContent = "Race stopped..."
     }
@@ -124,4 +126,4 @@ function showResult(){
 
 //initial render empty track
 renderTrack()
-updateScoreboard
+updateScoreboard()
