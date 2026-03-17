@@ -24,6 +24,11 @@ let hareWins = 0
 startBtn.addEventListener("click", startRace)
 
 function startRace(){
+    tortoisePosition = 1
+    harePosition = 1
+    stepCount = 0
+    renderTrack()
+
     messageEl.textContent = "BANG!!! AND THEY ARE OFF!"
     startBtn.disabled = true
 
@@ -54,10 +59,10 @@ function moveTortoise(){
         tortoisePosition+=4
     } else if (roll>=6 && roll<=7){
         //6-7 slip
-        tortoisePosition-=5
+        tortoisePosition-=3
     } else {
         //8-10 slow plod
-        tortoisePosition+=1
+        tortoisePosition+=2
     }
 }
 
@@ -71,9 +76,9 @@ function moveHare(){
         harePosition+=1
     } else if (roll>=7 && roll<=8){
         //7-8 big hop
-        harePosition+=8
+        harePosition+=5
     } else {
-        harePosition-=2
+        harePosition-=3
     }
 }
 
