@@ -11,11 +11,14 @@ const TRACK_LENGTH = 70 //sometimes const variables are all caps
 const startBtn = document.getElementById("startBtn")
 const messageEl = document.getElementById("message")
 const trackEl = document.getElementById("track")
+const scoreboardEl = document.getElementById("scoreboard")
 
 let tortoisePosition = 1
 let harePosition = 1
 let raceIntervalId = null
 let stepCount = 0
+let tortoiseWins = 0
+let hareWins = 0
 
 startBtn.addEventListener("click", startRace)
 
