@@ -106,3 +106,8 @@ button:disabled {
 #log .entry {
 	font-family: monospace;
 }
+
+#scoreboard{
+	display:flex;
+	flex-direction: column;
+}
