@@ -11,15 +11,24 @@ const TRACK_LENGTH = 70 //sometimes const variables are all caps
 const startBtn = document.getElementById("startBtn")
 const messageEl = document.getElementById("message")
 const trackEl = document.getElementById("track")
+const tortoiseScoreEl = document.getElementById("tortoiseScore")
+const hareScoreEl = document.getElementById("hareScore")
 
 let tortoisePosition = 1
 let harePosition = 1
 let raceIntervalId = null
 let stepCount = 0
+let tortoiseWins = 0
+let hareWins = 0
 
 startBtn.addEventListener("click", startRace)
 
 function startRace(){
+    tortoisePosition = 1
+    harePosition = 1
+    stepCount = 0
+    renderTrack()
+
     messageEl.textContent = "BANG!!! AND THEY ARE OFF!"
     startBtn.disabled = true
 
@@ -50,16 +59,16 @@ function moveTortoise(){
         tortoisePosition+=4
     } else if (roll>=6 && roll<=7){
         //6-7 slip
-        tortoisePosition-=5
+        tortoisePosition-=3
     } else {
         //8-10 slow plod
-        tortoisePosition+=1
+        tortoisePosition+=2
     }
 }
 
 function moveHare(){
     let roll = Math.floor(Math.random()*10)+1
-    if (roll<=1 && roll<=4){
+    if (roll>=1 && roll<=4){
         //1-4 slow plod
         harePosition+=4
     } else if (roll>=5 && roll<=6){
@@ -67,9 +76,9 @@ function moveHare(){
         harePosition+=1
     } else if (roll>=7 && roll<=8){
         //7-8 big hop
-        harePosition+=8
+        harePosition+=5
     } else {
-        harePosition-=2
+        harePosition-=3
     }
 }
 
@@ -100,17 +109,26 @@ function renderTrack(){
 }
 }
 
+function updateScoreboard(){
+    tortoiseScoreEl.textContent = `Tortoise: ${tortoiseWins} wins`
+    hareScoreEl.textContent = `Hare: ${hareWins} wins`
+}
+
 function showResult(){
     if(tortoisePosition>= TRACK_LENGTH && harePosition >= TRACK_LENGTH){
         messageEl.textContent = "It's a tie"
     } else if (tortoisePosition >= TRACK_LENGTH){
         messageEl.textContent = "TORTOISE WINS!"
+        tortoiseWins += 1
     } else if (harePosition >= TRACK_LENGTH){
         messageEl.textContent = "HARE WINS!"
+        hareWins += 1
     } else {
         messageEl.textContent = "Race stopped..."
     }
+    updateScoreboard()
 }
 
 //initial render empty track
 renderTrack()
+updateScoreboard()
