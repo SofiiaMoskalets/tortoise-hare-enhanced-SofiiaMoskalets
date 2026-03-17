@@ -62,7 +62,7 @@ function moveTortoise(){
 
 function moveHare(){
     let roll = Math.floor(Math.random()*10)+1
-    if (roll<=1 && roll<=4){
+    if (roll>=1 && roll<=4){
         //1-4 slow plod
         harePosition+=4
     } else if (roll>=5 && roll<=6){
@@ -103,17 +103,25 @@ function renderTrack(){
 }
 }
 
+function updateScoreboard(){
+    scoreboardEl.textContent = `Tortoise: ${tortoiseWins} wins Hare: ${hareWins} wins`
+}
+
 function showResult(){
     if(tortoisePosition>= TRACK_LENGTH && harePosition >= TRACK_LENGTH){
         messageEl.textContent = "It's a tie"
     } else if (tortoisePosition >= TRACK_LENGTH){
         messageEl.textContent = "TORTOISE WINS!"
+        tortoiseWins =+ 1
     } else if (harePosition >= TRACK_LENGTH){
         messageEl.textContent = "HARE WINS!"
+        hareWins =+ 1
     } else {
         messageEl.textContent = "Race stopped..."
     }
+    updateScoreboard()
 }
 
 //initial render empty track
 renderTrack()
+updateScoreboard
